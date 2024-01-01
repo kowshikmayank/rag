@@ -31,7 +31,7 @@ This API has two endpoints.
         "query"
     ],
     "additionalProperties": true
-}
+    }
 
     Example 
     curl --header "Content-Type: application/json" \
