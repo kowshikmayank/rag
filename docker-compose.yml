@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  
+  vectordb:
+    image: qdrant/qdrant:latest
+    ports: 
+      - "6333:6333"
+    
+  documaster: 
+    build: ./documaster/.
+    environment:
+    - OPENAI_API_KEY=Please-add-your-key-here
+    ports:
+      - "8080:8080"
+    depends_on:
+      - vectordb
+    restart: on-failure
+    links: 
+        - vectordb
+  
+  streamlit:
+    build: ./streamlit/.
+    ports:
+      - "8501:8501"
+    depends_on:
+      - vectordb
+      - documaster
+    restart: on-failure
+    links: 
+        - documaster

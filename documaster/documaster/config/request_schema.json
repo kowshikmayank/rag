@@ -1,0 +1,19 @@
+{
+    "type": "object",
+    "properties": {
+        "query": {
+            "type": "string"
+        },
+        "documents": {
+            "type": "array",
+            "items" : {
+                "type": "string"
+            }
+        }
+    },
+    "required": [
+        "query"
+    ],
+    "additionalProperties": true
+}
+
