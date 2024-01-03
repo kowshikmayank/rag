@@ -45,18 +45,3 @@ This API has two endpoints.
 * Run ```docker-compose up --build``` from the root of this folder
 
 * Navigate to ```http://localhost:8501``` to interact with the API by uploading documents and running queries against them. 
-
-* Run ```api_calls.py``` to check if everything works. Requires just ```pip3 install requests``` to setup the Python environment to do so. 
-
-## Notes 
-I am listing down a bunch of potential improvements that I would invest time in to make this application more robust. 
-
-* Make document uploading asynchronous as parsing and indexing them is expensive
-* Experiment with using a locally run language model to create the vector embeddings stored in the index. Currently, OpenAI calls are made to generate embeddings and that can get expensive fast. 
-* Experiment with different modes of vector retrieval and preprocessing of context before passing to the ChatGPT model. 
-* More extensive unit tests,integration tests et al
-* I have left a bunch of things like ```/documents``` in here that I would definitely not put in a repository, just in the interest of reproducibility
-* Evaluate exact/fuzzy matches to see how well our system is performing. ROUGE would be a good starting metric for fuzzy match type answers.
-* Neater front end! 
-
-
