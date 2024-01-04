@@ -72,6 +72,7 @@ def query():
         results = vector_store.search_with_filter(body.get("query"),document_list,3)
         answer = qa_pipeline(body.get("query"),results)
     except Exception as e:
+        # Also surface better error messages in case query or retrieved text is larger than context window
         return return_error("Unable to run query against document", e, 500)
     return Response(
         response=json.dumps({"Answer": f"{answer}"}),
@@ -83,8 +84,7 @@ def query():
 @app.route("/", methods=["GET"])
 def heartbeat():
     """
-    Receive a PDF file in a POST request.
-    Check if it already exists(using a hash) in the qdrant database, if not vectorise and add it to the database
+    Test if service is running! 
     """
     status = 200
     return Response(

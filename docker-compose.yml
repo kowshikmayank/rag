@@ -9,7 +9,7 @@ services:
   documaster:
     build: ./documaster/.
     environment:
-      - OPENAI_API_KEY=OPENAI_API_KEY_HERE #BYOK 
+      - OPENAI_API_KEY=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
     ports:
       - "8080:8080"
     depends_on:

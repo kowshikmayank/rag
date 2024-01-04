@@ -29,7 +29,7 @@ def process_pdf(path: str):
         text += page.extract_text() 
     text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
         chunk_size=1500,
-        chunk_overlap=0,
+        chunk_overlap=250,
     )
     docs = text_splitter.create_documents([p.extract_text() for p in reader.pages])
     chunks = list()
@@ -151,8 +151,7 @@ def qa_pipeline(query:str,results:list):
     prompt = hub.pull("rlm/rag-prompt")
     llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
     
-    #created this local vector cache to experiment with the retrieval pipeline, but dropped those in favor of
-    #simplicity and in consideration of OpenAI API call costs while developing! 
+    # Creating a local vector store in case we want to play around with retrieved result treatment 
     qdrant = Qdrant.from_documents(
     [Document(page_content=r.get("text"), metadata={"source": "local"}) for r in results],
     embedding = OpenAIEmbeddings(),
